@@ -1,0 +1,24 @@
+{
+  "name": "queen-md-bot",
+  "description": "Simple WhatsApp Bot",
+  "logo": "https://files.catbox.moe/3p0s2x.jpg",
+  "keywords": ["bot", "whatsapp", "baileys"],
+  "stack": "container",
+  "env": {
+    "SESSION_ID": {
+      "description": "Paste your SESSION_ID",
+      "required": true,
+      "value": ""
+    },
+    "OWNER_NUMBER": {
+      "description": "Owner number e.g 9230xxxxxxx",
+      "required": true,
+      "value": ""
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
