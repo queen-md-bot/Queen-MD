@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{ background:#111; color:white; text-align:center; font-family:sans-serif; }
+button{ background:#25D366; color:white; border:none; padding:10px 20px; margin:5px; border-radius:8px; font-weight:bold; }
+input{ padding:10px; width:80%; border-radius:8px; border:none; margin-top:10px; }
+#pBox, #qBox{ background:#222; padding:20px; border-radius:15px; margin:20px; }
+</style>
+</head>
+<body>
+
+<h2>QUEEN MD SESSION</h2>
+
+<button onclick="pairDikhao()">Pair Code</button>
+<button onclick="qrDikhao()">QR Scan</button>
+
+<div id="pBox">
+<input id="num" placeholder="92300xxxxxx">
+<button onclick="codeLo()">Code Lo</button>
+<h1 id="codeAgya"></h1>
+</div>
+
+<div id="qBox" style="display:none">
+<button onclick="qrLo()">QR Lo</button>
+<div id="qrAgya"></div>
+</div>
+
+<script>
+function pairDikhao(){
+ document.getElementById("pBox").style.display="block";
+ document.getElementById("qBox").style.display="none";
+}
+function qrDikhao(){
+ document.getElementById("pBox").style.display="none";
+ document.getElementById("qBox").style.display="block";
+}
+
+async function codeLo(){
+ let number = document.getElementById("num").value;
+ document.getElementById("codeAgya").innerText="Wait...";
+ let res = await fetch(`/code?number=${number}`);
+ let data = await res.json();
+ document.getElementById("codeAgya").innerText=data.code || data.message;
+}
+
+async function qrLo(){
+ document.getElementById("qrAgya").innerHTML="QR Loading...";
+ let res = await fetch(`/qr`);
+ let data = await res.json();
+ document.getElementById("qrAgya").innerHTML=`<img src="${data.qr}" style="width:280px; border-radius:10px; background:white; padding:10px;">`;
+}
+</script>
+
+</body>
+</html>
