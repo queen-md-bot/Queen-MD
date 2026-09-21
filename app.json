@@ -1,0 +1,14 @@
+{
+  "name": "QUEEN-MD",
+  "description": "Queen MD Whatsapp Bot",
+  "logo": "https://i.imgur.com/YOUR-LOGO.png",
+  "keywords": ["whatsapp", "bot", "queen-md"],
+  "stack": "container",
+  "env": {
+    "SESSION_ID": {
+      "description": "Paste your SESSION_ID from pair site",
+      "required": true,
+      "value": ""
+    }
+  }
+}
