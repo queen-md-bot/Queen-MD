@@ -81,15 +81,10 @@ async (conn, mek, m, { from, isGroup, reply }) => {
         await conn.groupSettingUpdate(from, "announcement");
         
         await conn.sendMessage(from, { 
-            text: `*🔒 Group Muted Successfully*\n\nAb sirf admins hi is group mein message kar sakte hain.\n\n*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊*`,
+            text: `*🔒 Group Muted Successfully*\n\nAb sirf admins hi is group mein message kar sakte hain.\n\n*© Power by Queen MD*`,
             contextInfo: {
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401706347293@newsletter',
-                    newsletterName: '🦋⍣⃝🇰ʜᴀɴzada🕊',
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 
@@ -121,15 +116,10 @@ async (conn, mek, m, { from, isGroup, reply }) => {
         await conn.groupSettingUpdate(from, "not_announcement");
         
         await conn.sendMessage(from, { 
-            text: `*🔓 Group Unmuted Successfully*\n\nAb sabhi participants message kar sakte hain.\n\n*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊*`,
+            text: `*🔓 Group Unmuted Successfully*\n\nAb sabhi participants message kar sakte hain.\n\n*© Power by Queen MD*`,
             contextInfo: {
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401706347293@newsletter',
-                    newsletterName: '🦋⍣⃝🇰ʜᴀɴzada🕊',
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 

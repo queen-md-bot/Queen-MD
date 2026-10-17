@@ -67,7 +67,7 @@ async (conn, mek, m, { from, q, reply, prefix }) => {
 2️⃣ *Audio (MP3)*
 3️⃣ *Photos (SlideShow)*
 
-> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊`;
+> © Power by Queen MD`;
 
         // Send Thumbnail and Menu
         const sentMsg = await conn.sendMessage(targetChat, { 
@@ -93,7 +93,7 @@ async (conn, mek, m, { from, q, reply, prefix }) => {
                         if (data.mp4 || data.mp4_hd) {
                             await conn.sendMessage(targetChat, {
                                 video: { url: data.mp4_hd || data.mp4 },
-                                caption: `✅ *${data.title}*\n\n> © 🦋⍣⃝🇰ʜᴀɴzada🕊`,
+                                caption: `✅ *${data.title}*\n\n> © Queen MD`,
                                 mimetype: "video/mp4"
                             }, { quoted: receivedMsg });
                         } else reply("❌ Video not available.");

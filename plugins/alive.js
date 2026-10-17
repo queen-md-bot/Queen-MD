@@ -1,9 +1,10 @@
 const { cmd, commands } = require('../inconnuboy');
 const config = require('../config');
 
-// Commande Ping
+// Commande Ping (renamed to avoid duplicate with main-ping.js)
 cmd({
-    pattern: "ping",
+    pattern: "latency",
+    alias: ["pingtest"],
     desc: "Check bot latency",
     category: "general",
     react: "⚙️"
@@ -32,7 +33,7 @@ async(conn, mek, m, { from, reply }) => {
     try {
         await conn.sendMessage(from, { 
             image: { url: config.IMAGE_PATH },
-            caption: `*🦋⍣⃝🇰ʜᴀɴzada🕊*\n\n> ${config.BOT_FOOTER}`
+            caption: `*Queen MD*\n\n> ${config.BOT_FOOTER}`
         }, { quoted: mek });
     } catch (e) {
         reply("Error: " + e.message);

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-//           KAMRAN-MD - UPSCALE AI (IMGUPSCALER)
+//           Queen MD - UPSCALE AI
 //---------------------------------------------------------------------------
 //  🚀 ENHANCE IMAGE QUALITY 2X OR 4X USING AI
 //---------------------------------------------------------------------------
@@ -112,15 +112,10 @@ cmd({
         // Send Result
         await conn.sendMessage(from, {
             image: { url: result.url },
-            caption: `✅ *AI UPSCALE COMPLETE*\n\n🔍 *Scale:* ${scale}x\n📦 *Size:* ${(result.size / 1024).toFixed(2)} KB\n\n*🚀 Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊*`,
+            caption: `✅ *AI UPSCALE COMPLETE*\n\n🔍 *Scale:* ${scale}x\n📦 *Size:* ${(result.size / 1024).toFixed(2)} KB\n\n*🚀 Powered by Queen MD*`,
             contextInfo: {
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401706347293@newsletter',
-                    newsletterName: '🦋⍣⃝🇰ʜᴀɴzada🕊',
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 

@@ -36,20 +36,13 @@ async (conn, mek, m, { from, args, q, reply }) => {
             videoUrl = vid.url;
         }
 
-        const MY_CHANNEL = "120363401706347293@newsletter";
-
         // Preview Message
         await conn.sendMessage(from, {
             image: { url: vid.thumbnail || vid.image },
             caption: `╭━━〔 🎵 𝗠𝗨𝗦𝗜𝗖 𝗙𝗢𝗨𝗡𝗗 〕━━━╮\n┃ 🎧 *Title* : ${vid.title}\n┃ ⏱️ *Duration* : ${vid.timestamp || 'N/A'}\n┃ 🔗 *Link* : ${videoUrl}\n╰━━━━━━━━━━━━━━━━━╯\n\n⏳ *Downloading audio...*`,
             contextInfo: {
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: MY_CHANNEL,
-                    newsletterName: "🦋⍣⃝🇰ʜᴀɴzada🕊", 
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 
@@ -67,12 +60,7 @@ async (conn, mek, m, { from, args, q, reply }) => {
             mimetype: "audio/mpeg",
             contextInfo: {
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: MY_CHANNEL,
-                    newsletterName: "🦋⍣⃝🇰ʜᴀɴzada🕊",
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 

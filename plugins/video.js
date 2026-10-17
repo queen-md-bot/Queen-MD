@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-//           KAMRAN-MD - YOUTUBE VIDEO DOWNLOADER (AUTO-DL)
+//           Queen MD - YOUTUBE VIDEO DOWNLOADER
 //---------------------------------------------------------------------------
 //  🚀 SEARCH AND DOWNLOAD VIDEOS AUTOMATICALLY
 //---------------------------------------------------------------------------
@@ -20,19 +20,33 @@ function normalizeYouTubeUrl(url) {
 }
 
 /**
- * Core Data Fetching Logic using Jawad-Tech API
+ * Core Data Fetching Logic — uses working yt-dl API
+ * (jawad-tech API broken tha: "Invalid URL" error deta tha)
  */
 async function fetchDownloadData(url, retries = 2) {
   try {
-    const apiUrl = `https://jawad-tech.vercel.app/download/ytdl?url=${encodeURIComponent(url)}`;
-    const response = await axios.get(apiUrl, { timeout: 20000 });
+    const apiUrl = `https://yt-dl.officialhectormanuel.workers.dev/?url=${encodeURIComponent(url)}`;
+    const response = await axios.get(apiUrl, { timeout: 25000 });
     const data = response.data;
 
-    if (data.status === true && data.result) {
-      return {
-        video_url: data.result.mp4,
-        title: data.result.title || "YouTube Video",
-      };
+    if (data.status === true && data.videos) {
+      // Best available quality chuno (360 > 240 > 144)
+      const qualities = ['360', '240', '144'];
+      let videoUrl = null;
+      for (const q of qualities) {
+        if (data.videos[q]) { videoUrl = data.videos[q]; break; }
+      }
+      if (!videoUrl) {
+        // koi bhi available quality le lo
+        const keys = Object.keys(data.videos);
+        if (keys.length) videoUrl = data.videos[keys[0]];
+      }
+      if (videoUrl) {
+        return {
+          video_url: videoUrl,
+          title: data.title || "YouTube Video",
+        };
+      }
     }
     throw new Error("API failed to return download link.");
   } catch (error) {
@@ -85,7 +99,7 @@ cmd(
 
 _📥 Processing your video file, please wait..._
 
-> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊`;
+> © Power by Queen MD`;
 
       await conn.sendMessage(from, { image: { url: ytdata.thumbnail || ytdata.image }, caption: infoText }, { quoted: mek });
       await conn.sendMessage(from, { react: { text: "⏳", key: mek.key } });
@@ -104,7 +118,7 @@ _📥 Processing your video file, please wait..._
         {
           video: { url: dlData.video_url },
           mimetype: "video/mp4",
-          caption: `✅ *${dlData.title}*\n\n*🚀 Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊*`,
+          caption: `✅ *${dlData.title}*\n\n*🚀 Powered by Queen MD*`,
           contextInfo: {
             externalAdReply: {
               title: "YT VIDEO DOWNLOADER",

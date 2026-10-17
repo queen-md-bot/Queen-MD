@@ -105,15 +105,10 @@ async (conn, mek, m, { from, isGroup, reply }) => {
         
         // Stylish Success Message
         await conn.sendMessage(from, { 
-            text: `*🔓 Group Unmuted Successfully*\n\nNow all participants can send messages in this group.\n\n*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊*`,
+            text: `*🔓 Group Unmuted Successfully*\n\nNow all participants can send messages in this group.\n\n*© Power by Queen MD*`,
             contextInfo: {
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401706347293@newsletter',
-                    newsletterName: '🦋⍣⃝🇰ʜᴀɴzada🕊',
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 

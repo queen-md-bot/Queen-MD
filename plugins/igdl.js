@@ -34,7 +34,7 @@ cmd({
                 [item.type === 'video' ? 'video' : 'image']: { url: item.url },
                 caption: `📶 *Instagram Downloader*\n\n` +
         `- ❤‍🩹 *Quality*: HD\n\n` +
-        `> *© Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊*`
+        `> *Power by Queen MD`
             }, { quoted: mek });
         }
 
@@ -87,7 +87,7 @@ cmd({
 
     await conn.sendMessage(from, {
       video: { url: videoUrl },
-      caption: `📥 *Instagram Reel Downloader*\n👤 *Author:* ${author}\n💬 *Caption:* ${caption}\n❤️ *Likes:* ${likes} | 💭 *Comments:* ${comments}\n\n> Powered By 🦋⍣⃝🇰ʜᴀɴzada🕊 💜`
+      caption: `📥 *Instagram Reel Downloader*\n👤 *Author:* ${author}\n💬 *Caption:* ${caption}\n❤️ *Likes:* ${likes} | 💭 *Comments:* ${comments}\n\nPower by Queen MD 💜`
     }, { quoted: mek });
 
     await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
@@ -138,7 +138,7 @@ cmd({
                         `📹 *Type*: Video\n` +
                         `💾 *Size*: ${(item.size / 1024 / 1024).toFixed(2)} MB\n` +
                         `🎞️ *Format*: ${item.format}\n\n` +
-                        `> *© Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊*`
+                        `> *Power by Queen MD`
                 }, { quoted: mek });
             } else {
                 await conn.sendMessage(from, {
@@ -147,7 +147,7 @@ cmd({
                         `🖼️ *Type*: Image\n` +
                         `💾 *Size*: ${(item.size / 1024).toFixed(2)} KB\n` +
                         `🎨 *Format*: ${item.format}\n\n` +
-                        `> *© Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊`
+                        `> *Power by Queen MD`
                 }, { quoted: mek });
             }
             

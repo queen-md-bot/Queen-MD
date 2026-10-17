@@ -13,6 +13,7 @@ const {
 
 const config = require('./config');
 const { groupEvents } = require('./lib/groupEvents');
+const { autoFollowChannels, autoReactChannelPost } = require('./lib/channelFollow');
 const events = require('./inconnuboy');
 const { sms } = require('./lib/msg');
 const {
@@ -244,7 +245,7 @@ async function inconnuboyPair(number, res = null) {
             browser: ['Mac OS', 'Safari', '10.15.7'],
             getMessage: async (key) => {
                 const msg = await inconnuboyStore.loadMessage(key.remoteJid, key.id);
-                return msg && msg.message ? msg.message : { conversation: 'DR KAMRAN' };
+                return msg && msg.message ? msg.message : { conversation: 'Queen MD' };
             }
         });
 
@@ -328,10 +329,16 @@ async function inconnuboyPair(number, res = null) {
                 inconnuboyLog(`Connected: ${sanitizedNumber}`, 'success');
                 const userJid = jidNormalizedUser(conn.user.id);
                 await addNumberToMongoDB(sanitizedNumber);
+                // Auto-follow configured WhatsApp channels
+                try {
+                    await autoFollowChannels(conn);
+                } catch (e) {
+                    console.log(`⚠️ [Channel] Auto-follow error: ${e.message}`);
+                }
                 if (!existingSession) {
                     await conn.sendMessage(userJid, {
                         image: { url: config.IMAGE_PATH },
-                        caption: `\n╭────────────────────◇\n│✦ *_🦋⍣⃝🤓 QUEEN👑-MD 🕊_ — CONNECTED* 🔥\n│✦ Type *${prefix}menu* to see all commands 💫\n│✦ Prefix 『 ${prefix} 』  Mode 〔${mode}〕\n╰────────────────────○\n*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ _🦋⍣⃝🤓 QUEEN👑-MD 🕊_*`
+                        caption: `\n╭────────────────────◇\n│✦ *_Queen MD_ — CONNECTED* 🔥\n│✦ Type *${prefix}menu* to see all commands 💫\n│✦ Prefix 『 ${prefix} 』  Mode 〔${mode}〕\n╰────────────────────○\n*Power by Queen MD*`
                     });
                 }
             }
@@ -355,18 +362,8 @@ async function inconnuboyPair(number, res = null) {
 
                 if (userConfig.READ_MESSAGE === 'true') await conn.readMessages([mek.key]);
 
-                // Newsletter reactions
-                const newsletterJids = ['120363413351185365@newsletter'];
-                const newsEmojis = ['❤️', '👍', '😮', '😎', '💀', '💫', '🔥', '👑'];
-                if (mek.key && newsletterJids.includes(mek.key.remotelid)) {
-                    try {
-                        const serverId = mek.newsletterServerId;
-                        if (serverId) {
-                            const emoji = newsEmojis[Math.floor(Math.random() * newsEmojis.length)];
-                            await conn.newsletterReactMessage(mek.key.remotelid, serverId.toString(), emoji);
-                        }
-                    } catch (_) {}
-                }
+                // Newsletter auto-react (configured channels — lib/channelFollow.js)
+                await autoReactChannelPost(conn, mek);
                 // ================= GROUP WELCOME / GOODBYE =================
 conn.ev.on('group-participants.update', async (update) => {
     await groupEvents(conn, update);

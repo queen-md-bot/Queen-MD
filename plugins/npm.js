@@ -59,7 +59,7 @@ async (conn, mek, m, { from, args, q, reply, react }) => {
 • *Version:* ${latest}
 • *Format:* .tgz
 
-Powered By *🦋⍣⃝🇰ʜᴀɴzada🕊* 🤖`
+Powered By *Queen MD* 🤖`
             },
             { quoted: mek }
         );

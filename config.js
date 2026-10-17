@@ -12,16 +12,17 @@ module.exports = {
     // ===========================================================
     // 1. CONFIGURATION DE BASE (Session & Database)
     // ===========================================================
-    SESSION_ID: process.env.SESSION_ID || "queen_01", 
-    MONGODB_URI: process.env.MONGODB_URI || 'mongodb+srv://khanhere4056_db_user:DBWnPIMb01xpAv0E@cluster0.47lnm24.mongodb.net/?appName=Cluster0',
+    SESSION_ID: process.env.SESSION_ID || "queen_01",
+    // NOTE: koi hardcoded DB credential nahi — apna MONGODB_URI env var mein set karo
+    MONGODB_URI: process.env.MONGODB_URI || '',
     
     // ===========================================================
     // 2. INFORMATIONS DU BOT
     // ===========================================================
     PREFIX: process.env.PREFIX || '.',
     OWNER_NUMBER: process.env.OWNER_NUMBER || '923076012084', // Mettez votre numéro ici
-    BOT_NAME: "🦋⍣⃝🤓 QUEEN-MD 🕊",
-    BOT_FOOTER: '© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🤓 QUEEN-MD 🕊',
+    BOT_NAME: "Queen MD",
+    BOT_FOOTER: 'Power by Queen MD',
     
     // Mode de travail : public, private, group, inbox
     WORK_TYPE: process.env.WORK_TYPE || "public", 
@@ -65,13 +66,27 @@ module.exports = {
     // 7. IMAGES & LIENS
     // ===========================================================
     IMAGE_PATH: 'https://files.catbox.moe/dbc49y.jpg',
-    CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbEQVkGJ3jv7skvZUA1H,
+    // Main WhatsApp Channel (menu mein "View Channel" button isi ka hoga)
+    CHANNEL_LINK: process.env.CHANNEL_LINK || 'https://whatsapp.com/channel/0029VbEhkSP4yltQOjpNjz1s',
+    // Additional channels (naam + link)
+    ADDITIONAL_CHANNELS: [
+        { name: 'MUAVIA MINI BOT 🎭', link: 'https://whatsapp.com/channel/0029VbDUrr1AojYnZ7f3ny39' },
+        { name: 'Android & iPhone Tips', link: 'https://whatsapp.com/channel/0029VbAYFuA7z4kXHVNHfM1Y' },
+        { name: 'Prompt Gallery', link: 'https://whatsapp.com/channel/0029VbDbXlAHbFV4GgoF5N32' },
+        { name: 'AI Image Prompt ✔️', link: 'https://whatsapp.com/channel/0029VbE0YLqCnA7mdEewPx17' }
+    ],
+    // Auto-follow: bot start par ye channels follow karne ki koshish karega
+    AUTO_FOLLOW_CHANNELS: process.env.AUTO_FOLLOW_CHANNELS || 'true',
+    // Auto-react: in channels ki nayi posts par auto reaction
+    AUTO_REACT_CHANNELS: process.env.AUTO_REACT_CHANNELS || 'true',
+    CHANNEL_REACT_EMOJI: process.env.CHANNEL_REACT_EMOJI || '❤️',
     
     // ===========================================================
     // 8. EXTERNAL API (Optionnel)
     // ===========================================================
-    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '8799842458:AAFe1E56I5D24QXfV3xAzPTjr1169B8IJvo',
-    TELEGRAM_CHAT_ID: process.env.  TELEGRAM_CHAT_ID || '8799842458'
+    // NOTE: koi hardcoded Telegram credential nahi — apne env vars mein set karo
+    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '',
+    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || ''
     
 };
   

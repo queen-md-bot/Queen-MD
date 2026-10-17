@@ -352,20 +352,22 @@ async (conn, mek, m, { from, sender, reply }) => {
 *├▢ ytv*
 *╰────────────────*
 
-${config.DESCRIPTION}`;
+`;
 
+        // View Channel — menu text mein channel section
+        menuText += `\n*╭────⬡ 📢 CHANNEL ⬡────*\n*├▢ View Channel:* ${config.CHANNEL_LINK}\n*╰────────────────*\n\n${config.BOT_FOOTER}`;
+
+        const { getChannelAdReply } = require('../lib/channel');
         await conn.sendMessage(from, {
             image: { url: config.IMAGE_PATH },
             caption: menuText,
             contextInfo: {
                 mentionedJid: [m.sender],
-                isForwarded: true,
-                forwardingScore: 999,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401706347293@newsletter',
-                    newsletterName: config.BOT_NAME,
-                    serverMessageId: 1
-                }
+                externalAdReply: getChannelAdReply(
+                    '📢 View Channel',
+                    config.BOT_NAME + ' — tap to open',
+                    config.IMAGE_PATH
+                )
             }
         }, { quoted: mek });
 

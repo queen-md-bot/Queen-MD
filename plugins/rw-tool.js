@@ -53,7 +53,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, reply, text, isAdmins, isOwner }) => {
     try {
-        if (!isAdmins && !isOwner) return reply("❌ *🦋⍣⃝🇰ʜᴀɴzada🕊:* Admins only.");
+        if (!isAdmins && !isOwner) return reply("❌ *Queen MD:* Admins only.");
 
         const q = m.quoted ? m.quoted : m;
         const mime = (q.msg || q).mimetype || '';
@@ -102,6 +102,6 @@ cmd({
 
     } catch (err) {
         console.error(err);
-        reply(`❌ *🦋⍣⃝🇰ʜᴀɴzada🕊 Error:* ${err.message}`);
+        reply(`❌ *Queen MD Error:* ${err.message}`);
     }
 });

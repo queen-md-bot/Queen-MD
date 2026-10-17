@@ -95,7 +95,7 @@ cmd({
         }
 
         const prompt = text || "animate this image";
-        reply(`🎬 *🦋⍣⃝🇰ʜᴀɴzada🕊: AI Video Generator*\n\n📝 Prompt: ${prompt}\n⏳ Requesting server... Please wait.`);
+        reply(`🎬 *Queen MD: AI Video Generator*\n\n📝 Prompt: ${prompt}\n⏳ Requesting server... Please wait.`);
 
         const generateResult = await freevideo.generate({ prompt, imageBuffer });
 
@@ -111,7 +111,7 @@ cmd({
             return reply(`❌ Error: ${pollResult.error}`);
         }
 
-        const caption = `🎬 *AI Video Generated Successfully!*\n\n📝 *Prompt:* ${prompt}\n\n> © Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊`;
+        const caption = `🎬 *AI Video Generated Successfully!*\n\n📝 *Prompt:* ${prompt}\n\n> Power by Queen MD`;
 
         await conn.sendMessage(from, {
             video: { url: pollResult.data.video_url },

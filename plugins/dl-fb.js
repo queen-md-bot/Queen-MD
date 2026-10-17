@@ -1,60 +1,33 @@
 //---------------------------------------------------------------------------
-//           KAMRAN-MD - FACEBOOK VIDEO DOWNLOADER (FSAVER)
+//           Queen MD - FACEBOOK VIDEO DOWNLOADER
 //---------------------------------------------------------------------------
 //  🚀 HIGH-SPEED FB VIDEO DOWNLOADS (LID & NEWSLETTER SUPPORT)
 //---------------------------------------------------------------------------
 
 const { cmd } = require('../inconnuboy');
 const axios = require('axios');
-const cheerio = require('cheerio');
 const config = require('../config');
-
-// Newsletter Context for professional look
-const newsletterContext = {
-    forwardingScore: 999,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363401706347293@newsletter',
-        newsletterName: '🦋⍣⃝🇰ʜᴀɴzada🕊',
-        serverMessageId: 143
-    }
-};
+const { getNewsletterContext } = require('../lib/channel');
 
 /**
- * FSaver Scraper Logic
+ * Facebook Downloader — uses jawad-tech downloader API
+ * (fsaver.net scraper broken tha: homepage par redirect karta hai)
  */
-const FSaver = {
-    config: {
-        base: 'https://fsaver.net',
-        agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
-    },
-
-    download: async (videoUrl) => {
-        try {
-            const fetchUrl = `${FSaver.config.base}/download/?url=${encodeURIComponent(videoUrl)}`;
-            
-            const { data } = await axios.get(fetchUrl, {
-                headers: {
-                    "Upgrade-Insecure-Requests": "1",
-                    "User-Agent": FSaver.config.agent,
-                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-                    "Referer": "https://fsaver.net/"
-                },
-                timeout: 15000
-            });
-
-            const $ = cheerio.load(data);
-            const videoSrc = $('.video__item').attr('src');
-
-            if (!videoSrc) return null;
-
-            return videoSrc.startsWith('http') ? videoSrc : FSaver.config.base + videoSrc;
-        } catch (err) {
-            console.error("FSaver Error:", err.message);
-            return null;
+async function fbDownload(videoUrl) {
+    try {
+        const apiUrl = `https://jawad-tech.vercel.app/downloader?url=${encodeURIComponent(videoUrl)}`;
+        const { data } = await axios.get(apiUrl, { timeout: 25000 });
+        if (data && data.status === true && data.result && data.result.length > 0) {
+            // Pehla available video URL lo
+            const item = data.result[0];
+            return item.url || item.video || item.link || null;
         }
+        return null;
+    } catch (err) {
+        console.error("FB API Error:", err.message);
+        return null;
     }
-};
+}
 
 // --- COMMAND: FACEBOOK ---
 
@@ -71,25 +44,25 @@ cmd({
     try {
         await conn.sendMessage(from, { react: { text: "⏳", key: mek.key } });
 
-        // 1. Scraping the video link
-        const videoUrl = await FSaver.download(text);
+        // 1. API se video link lao
+        const videoUrl = await fbDownload(text);
 
         if (!videoUrl) {
-            return reply("❌ Video not found. Please make sure the link is public and correct.");
+            return reply("❌ Video not found. Please make sure the link is public and correct.\n\n_Note: FB download real public video URL se test karna baqi hai._");
         }
 
         const caption = `╭──〔 *🎬 FACEBOOK DOWNLOAD* 〕  
 ├─ 🔗 *Source:* Facebook
-├─ 📂 *Format:* MP4 (HD/SD)
-╰───────────────────🚀
+├─ 📂 *Format:* MP4
+╰───────────────────
 
-*🚀 Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊*`;
+*Power by Queen MD*`;
 
-        // 2. Sending Video with Newsletter Context
+        // 2. Sending Video
         await conn.sendMessage(from, { 
             video: { url: videoUrl }, 
             caption: caption,
-            contextInfo: newsletterContext
+            contextInfo: getNewsletterContext()
         }, { quoted: mek });
 
         await conn.sendMessage(from, { react: { text: "✅", key: mek.key } });

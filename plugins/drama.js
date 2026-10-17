@@ -44,25 +44,37 @@ cmd({
         // 🖼️ Send thumbnail preview
         await conn.sendMessage(from, {
             image: { url: videoInfo.thumbnail },
-            caption: `*🎬 DRAMA DOWNLOADER*\n\n🎞️ *Title:* ${videoInfo.title}\n📺 *Channel:* ${videoInfo.author.name}\n🕒 *Duration:* ${videoInfo.timestamp}\n\n*Status:* Download Drama...\n\n*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊*`
+            caption: `*🎬 DRAMA DOWNLOADER*\n\n🎞️ *Title:* ${videoInfo.title}\n📺 *Channel:* ${videoInfo.author.name}\n🕒 *Duration:* ${videoInfo.timestamp}\n\n*Status:* Download Drama...\n\n*© Power by Queen MD*`
         }, { quoted: mek });
 
-        // ⚙️ Fetch from JawadTech API
-        const apiUrl = `https://jawad-tech.vercel.app/download/ytdl?url=${encodeURIComponent(url)}`;
-        const { data } = await axios.get(apiUrl);
+        // ⚙️ Fetch from working yt-dl API (jawad-tech broken tha)
+        const apiUrl = `https://yt-dl.officialhectormanuel.workers.dev/?url=${encodeURIComponent(url)}`;
+        const { data } = await axios.get(apiUrl, { timeout: 25000 });
 
-        if (!data?.status || !data?.result?.mp4) {
+        // Best available video quality
+        let videoUrl = null;
+        if (data?.status && data?.videos) {
+            for (const q of ['360', '240', '144']) {
+                if (data.videos[q]) { videoUrl = data.videos[q]; break; }
+            }
+            if (!videoUrl) {
+                const keys = Object.keys(data.videos);
+                if (keys.length) videoUrl = data.videos[keys[0]];
+            }
+        }
+
+        if (!videoUrl) {
             return await reply("❌ Failed to fetch download link! Please try again later.");
         }
 
-        const vid = data.result;
+        const vidTitle = data.title || 'Drama Video';
 
         // 📦 Send as document (.mp4)
         await conn.sendMessage(from, {
-            document: { url: vid.mp4 },
-            fileName: `${vid.title}.mp4`,
+            document: { url: videoUrl },
+            fileName: `${vidTitle}.mp4`,
             mimetype: 'video/mp4',
-            caption: `🎬 *${vid.title}*\n\n*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 🦋⍣⃝🇰ʜᴀɴzada🕊*`
+            caption: `🎬 *${vidTitle}*\n\n*Power by Queen MD*`
         }, { quoted: mek });
 
         // ✅ React success

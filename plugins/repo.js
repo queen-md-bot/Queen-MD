@@ -11,7 +11,7 @@ cmd({
 }, async (conn, mek, m, { from, reply }) => {
     try {
         let repoText = `*╭────⬡ ${config.BOT_NAME} ⬡────⭓*
-*├▢ 📂 Repository:* 🦋⍣⃝🇰ʜᴀɴzada🕊
+*├▢ 📂 Repository:* Queen MD
 *├▢ 👨‍💻 Owner:* ${config.OWNER_NAME}
 *├▢ 🏷️ Version:* 1.0
 *╰─────────────────⭓*
@@ -20,7 +20,7 @@ cmd({
 *├▢ 🌐 Web:* https://khan-zada-f3a760e88caa.herokuapp.com/
 *╰────────────────*
 
-> *© Powered by 🦋⍣⃝🇰ʜᴀɴzada🕊*`;
+> *Power by Queen MD`;
 
         await conn.sendMessage(from, {
             image: { url: config.MENU_IMAGE_URL || 'https://up6.cc/2026/06/178265938722861.jpg' },
@@ -28,12 +28,7 @@ cmd({
             contextInfo: {
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401706347293@newsletter',
-                    newsletterName: config.BOT_NAME,
-                    serverMessageId: 143
-                }
+                isForwarded: true
             }
         }, { quoted: mek });
 
